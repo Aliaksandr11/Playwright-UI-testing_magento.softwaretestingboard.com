@@ -9,8 +9,7 @@ on:
         type: choice
         default: all
         options:
-          - smoke
-          - regression
+          - bug
           - all
 
 permissions:
