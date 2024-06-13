@@ -1,6 +1,7 @@
 import pytest
 
 
+@pytest.mark.smoke
 def test_dropdown_sort_selected(eco_collection_page):
     eco_collection_page.open()
     eco_collection_page.select_sort_by_value('price')
@@ -26,16 +27,19 @@ def test_descending_price_check(eco_collection_page):
     eco_collection_page.check_descending_price()
 
 
+@pytest.mark.regression
 def test_check_price_of_goods_displayed(eco_collection_page):
     eco_collection_page.open()
     eco_collection_page.check_price_of_goods_displayed()
 
 
+@pytest.mark.regression
 def test_check_image_photo_displayed(eco_collection_page):
     eco_collection_page.open()
     eco_collection_page.check_image_of_goods_displayed()
 
 
+@pytest.mark.smoke
 def test_check_next_button_redirects_next_page(eco_collection_page):
     eco_collection_page.open()
     eco_collection_page.check_next_button_redirect_next_page()

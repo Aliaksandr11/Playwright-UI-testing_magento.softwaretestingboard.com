@@ -1,6 +1,9 @@
+import pytest
+
 from data.data_for_tests import CreateAccountData as acc
 
 
+@pytest.mark.smoke
 def test_create_account(create_account_page):
     create_account_page.open()
     create_account_page.name_input(acc.name)
@@ -12,17 +15,20 @@ def test_create_account(create_account_page):
     create_account_page.check_create_account_message()
 
 
+@pytest.mark.smoke
 def test_fields_and_button_is_displayed(create_account_page):
     create_account_page.open()
     create_account_page.check_all_fields_displayed()
     create_account_page.check_create_account_button_displayed()
 
 
+@pytest.mark.regression
 def test_labels_match_the_fields(create_account_page):
     create_account_page.open()
     create_account_page.check_all_fields_labels()
 
 
+@pytest.mark.regression
 def test_password_field_requirements(create_account_page):
     create_account_page.open()
     create_account_page.password_input('1')
