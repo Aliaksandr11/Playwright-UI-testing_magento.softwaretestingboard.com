@@ -1,6 +1,6 @@
 import pytest
 
-from data.data_for_tests import CreateAccountData as acc
+from tests.data.data_for_tests import CreateAccountData as acc
 
 
 @pytest.mark.smoke
