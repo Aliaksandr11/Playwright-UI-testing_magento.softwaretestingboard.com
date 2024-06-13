@@ -32,6 +32,12 @@ jobs:
           python-version: "3.12"
       - name: Install dependancies
         run: pip install -r requirements.txt
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Playwright
+        run: npx playwright install          
       - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all'"
         run: pytest -v --alluredir=allure-results
