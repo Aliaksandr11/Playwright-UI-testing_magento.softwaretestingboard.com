@@ -10,6 +10,8 @@ on:
         default: all
         options:
           - bug
+          - smoke
+          - regression
           - all
 
 permissions:
@@ -32,15 +34,18 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all'"
-        run: cd tests_UI_eokulik_selenium && pytest -v --alluredir=allure-results
+        run: pytest -v --alluredir=allure-results
         continue-on-error: true
       - name: Run smoke tests
         if: "github.event.inputs.deployment_target == 'smoke'"
-        run: cd tests_UI_eokulik_selenium && pytest -v -m smoke --alluredir=allure-results
+        run: pytest -v -m smoke --alluredir=allure-results
         continue-on-error: true
       - name: Run regression tests
         if: "github.event.inputs.deployment_target == 'regression'"
-        run: cd tests_UI_eokulik_selenium && pytest -v -m regression --alluredir=allure-results
+        run: pytest -v -m regression --alluredir=allure-results
+      - name: Run bug tests
+        if: "github.event.inputs.deployment_target == 'bug'"
+        run: pytest -v -m bug --alluredir=allure-results
         continue-on-error: true
       - name: Install Java
         uses: actions/setup-java@v4
@@ -53,7 +58,7 @@ jobs:
           sudo tar -zxvf allure-2.29.0.tgz -C /opt/ &&
           sudo ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure
       - name: Generate report
-        run: allure generate -c tests_UI_eokulik_selenium/allure-results -o _site
+        run: allure generate -c allure-results -o _site
       - name: Save report as artifact
         uses: actions/upload-artifact@v4
         with:
